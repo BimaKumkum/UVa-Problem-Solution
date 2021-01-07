@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<bool> prime(1000000,true);
+vector<int> PrimeList;
+void getPrime(){
+    for(int i=2;i<=1000000;i++){
+        if(prime[i]){
+            PrimeList.push_back(i);
+            for(int j = i + i; j < 1000000; j += i)
+                prime[j] = false;
+        }
+    }
+}
+int main()
+{
+    getPrime();
+    int n,flag;
+    while(cin>>n&&n){
+        int i=0,flag=0;
+        while(PrimeList[i]<n){
+        
+            if(prime[n-PrimeList[i]]){
+                    cout<<n<<":"<<endl;
+                cout<<PrimeList[i]<<"+"<<n-PrimeList[i]<<endl;
+                flag=1;
+                break;
+            }
+            else{
+                i++;
+            }
+         }
+        if(flag ==0)
+        {
+            cout<<n<<":"<<endl;
+            cout<<"NO WAY!"<<endl;
+        }
+    }
+    return 0;
+}
