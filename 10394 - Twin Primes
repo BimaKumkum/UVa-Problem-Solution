@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<bool> prime(20000000,true);
+vector<int> PrimeList;
+void getPrime(){
+    for(int i=2;i<=20000000;i++){
+        if(prime[i]){
+            PrimeList.push_back(i);
+            for(int j = i + i; j < 20000000; j += i)
+                prime[j] = false;
+        }
+    }
+}
+int main()
+{
+    getPrime();
+    int index=0;
+    vector<pair<int,int> >List;
+    for(int i=0;i<PrimeList.size();i++)
+    {
+        if(PrimeList[i+1]-PrimeList[i] == 2)
+        {
+            List.push_back(make_pair(PrimeList[i],PrimeList[i+1]));
+        }
+    }
+    int n,i;
+    while(cin>>n&&n){
+         cout<<"("<<List[n-1].first<<", "<<List[n-1].second<<")"<<endl;
+    }
+    return 0;
+}
